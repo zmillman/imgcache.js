@@ -81,7 +81,9 @@ Storing images
 Images are stored into the local folder specified by `ImgCache.options.localCacheFolder`. To add a file to the cache:
 
 ```javascript
-ImgCache.cacheFile('http://my-cdn.com/users/2/profile.jpg');
+ImgCache.cacheFile('http://my-cdn.com/users/2/profile.jpg', function(url){
+  console.log(url); // filesystem:http://localhost:3000/persistent/imgcache/34e4...807.jpg
+});
 ```
 
 TODO: add documentation for `ImgCache.cacheBackground`
@@ -104,7 +106,7 @@ ImgCache.cacheFile(target.attr('src'), function(){
 To check if a file is stored locally:
 
 ```javascript
-ImgCache.isCached(target.attr('src'), function(path, success){
+ImgCache.isCached(target.attr('src'), function(url, success){
   if(success){
     // already cached
     ImgCache.useCachedFile(target);

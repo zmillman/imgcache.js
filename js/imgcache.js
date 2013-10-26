@@ -278,7 +278,7 @@ var ImgCache = {
 				);
 				}
 
-				if (success_callback) success_callback();
+				if (success_callback) success_callback(_getFileEntryURL(entry));
 			},
 			function(error) {
 				if (error.source) logging('Download error source: ' + error.source, 3);
@@ -302,15 +302,15 @@ var ImgCache = {
 			// issue #4 -- android cordova specific
 			path = path.substr(7);
 		}
-		var ret = function(exists) {
-			response_callback(img_src, exists);
+		var ret = function(entry, exists) {
+			response_callback(_getFileEntryURL(entry), exists);
 		};
 		// try to get the file entry: if it fails, there's no such file in the cache
 		ImgCache.filesystem.root.getFile(
 			path,
 			{ create: false },
-			function() { ret(true); },
-			function() { ret(false); });
+			function(entry) { ret(entry, true); },
+			function(entry) { ret(entry, false); });
 	};
 
 	// $img: jQuery object of an <img/> element
@@ -478,5 +478,3 @@ var ImgCache = {
 		return _getFileEntryURL(ImgCache.dirEntry);
 	};
 })(window.jQuery || window.Zepto);
-
-
