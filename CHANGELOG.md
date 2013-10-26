@@ -1,3 +1,8 @@
+Version 0.5.3 - Oct 25, 2013
+---
+* Return file URL for cacheFile callback
+* Return file URL instead of path for isCached callback
+
 Version 0.5.2 - Jan 07, 2013
 ---
 * Fixed isCache for Android
