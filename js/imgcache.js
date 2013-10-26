@@ -303,7 +303,11 @@ var ImgCache = {
 			path = path.substr(7);
 		}
 		var ret = function(entry, exists) {
-			response_callback(_getFileEntryURL(entry), exists);
+      if (exists) {
+        response_callback(_getFileEntryURL(entry), exists);
+      } else {
+        response_callback(null, exists);
+      }
 		};
 		// try to get the file entry: if it fails, there's no such file in the cache
 		ImgCache.filesystem.root.getFile(
